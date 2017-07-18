@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
-
+#import "Masonry.h"
+#import "CustomView.h"
+#define KSCreeHeight [UIScreen mainScreen].bounds.size.height
+#define KSCreeWidth  [UIScreen mainScreen].bounds.size.width
 @interface ViewController ()
 
 @end
@@ -16,12 +19,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view, typically from a nib.
+    CustomView *customeView = [[CustomView alloc]init];
+    [self.view addSubview:customeView];
+    __weak typeof(self)weakSelf = self;
+    customeView.backgroundColor = [UIColor orangeColor];
+    [customeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.view).offset(50);
+        make.left.equalTo(weakSelf.view).offset(KSCreeWidth * 0.1);
+        make.width.mas_equalTo(KSCreeWidth * 0.8);
+        make.height.mas_equalTo(KSCreeHeight * 0.8);
+        
+//        make.bottom.equalTo(weakSelf.view).offset(-100);
+//        make.right.equalTo(weakSelf.view).offset(-100);
+    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
